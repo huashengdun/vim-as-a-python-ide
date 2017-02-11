@@ -9,3 +9,5 @@ Vim as a Python IDE
 3) Support JavaScipt syntax check, use jslint as a checker
 
 4) Support virtualenv, put venv.py in your ~/.vim directory
+
+5) And a lot of vim plugins I often use :)
