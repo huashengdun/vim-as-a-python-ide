@@ -1,106 +1,111 @@
 " ============================================================================
-" Vundle initialization
+" Vim-plug initialization
 
-" no vi-compatible
-set nocompatible
-
-" Setting up Vundle - the vim plugin bundler
-let iCanHazVundle=1
-let vundle_readme=expand('~/.vim/bundle/Vundle.vim/README.md')
-if !filereadable(vundle_readme)
-    echo "Installing Vundle..."
+let vim_plug_just_installed = 0
+let vim_plug_path = expand('~/.vim/autoload/plug.vim')
+if !filereadable(vim_plug_path)
+    echo "Installing Vim-plug..."
     echo ""
-    silent !mkdir -p ~/.vim/bundle
-    silent !git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-    let iCanHazVundle=0
+    silent !mkdir -p ~/.vim/autoload
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    let vim_plug_just_installed = 1
 endif
 
-filetype off
-
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+" manually load vim-plug the first time
+if vim_plug_just_installed
+    :execute 'source '.fnameescape(vim_plug_path)
+endif
 
 " ============================================================================
+call plug#begin('~/.vim/plugged')
+
 " plugins from github repos
 
 " Colorschemes
-Plugin 'junegunn/seoul256.vim'
-Plugin 'huashengdun/wombat'
+Plug 'junegunn/seoul256.vim'
+Plug 'huashengdun/wombat'
 
 " Airlline for status lines
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " Lanuage syntax checker
-Plugin 'vim-syntastic/syntastic'
+Plug 'vim-syntastic/syntastic'
 
 " Better file browser
-Plugin 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 
 " Class/module browser
-Plugin 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar'
 
 " Code and files fuzzy finder
-Plugin 'ctrlpvim/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 
 " Yank history navigation
-Plugin 'YankRing.vim'
+Plug 'vim-scripts/YankRing.vim'
 
 " Search results counter
-Plugin 'IndexedSearch'
+Plug 'vim-scripts/IndexedSearch'
 
 " XML/HTML tags navigation
-Plugin 'matchit.zip'
+Plug 'vim-scripts/matchit.zip'
 
 " Zen coding
-Plugin 'mattn/emmet-vim'
+Plug 'mattn/emmet-vim'
 
 " Surround
-Plugin 'tpope/vim-surround'
+Plug 'tpope/vim-surround'
 
 " Autoclose
-Plugin 'Townk/vim-autoclose'
+Plug 'Townk/vim-autoclose'
 
 " Indent text object
-Plugin 'michaeljsmith/vim-indent-object'
+Plug 'michaeljsmith/vim-indent-object'
 
 " Indentation based movements
-Plugin 'jeetsukumaran/vim-indentwise'
+Plug 'jeetsukumaran/vim-indentwise'
 
 " python auto completion
-Plugin 'davidhalter/jedi-vim'
+Plug 'davidhalter/jedi-vim'
+
+" python virtualenv
+Plug 'jmcantrell/vim-virtualenv'
 
 " Snippets manager (SnipMate), dependencies, and snippets repo
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'honza/vim-snippets'
-Plugin 'garbas/vim-snipmate'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'honza/vim-snippets'
+Plug 'garbas/vim-snipmate'
 
 " Git wrapper
-Plugin 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 
 " Git/mercurial/others diff icons on the side of the file lines
-Plugin 'mhinz/vim-signify'
+Plug 'mhinz/vim-signify'
 
 " javascript syntax highlighting and improved indentation
-Plugin 'pangloss/vim-javascript'
+Plug 'pangloss/vim-javascript'
 
-call vundle#end()
+" clang_complete
+Plug 'Rip-Rip/clang_complete'
+
+" Tell vim-plug we finished declaring plugins, so it can load them
+call plug#end()
 
 " ============================================================================
 " Install plugins the first time vim runs
 
-if iCanHazVundle == 0
+if vim_plug_just_installed
     echo "Installing Bundles, please ignore key map error messages"
-    :PluginInstall
+    :PlugInstall
 endif
 
 " ============================================================================
 
 " Vim settings and mappings
+
+" no vi-compatible
+set nocompatible
 
 " allow plugins by file type (required for plugins!)
 filetype plugin indent on
@@ -115,6 +120,8 @@ set shiftwidth=4
 autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType htmldjango setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType c setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType cpp setlocal shiftwidth=2 tabstop=2 softtabstop=2
 
 " html indent settings
 let g:html_indent_inctags = "html,body,head,tbody"
@@ -245,23 +252,13 @@ nmap <silent> <C-j> :call Adapt_seoul256_background(-1)<CR>
 " let g:airline#extensions#tabline#enabled = 1
 
 
-" let syntastic support different versions of python
-" let jedi support virtualenv
+" ------------------- syntastic ----------------------
+
 if has('python')
     let python_path = '/usr/bin/python'
-    let python_exec = 'py'
 else
     let python_path = '/usr/bin/python3'
-    let python_exec = 'py3'
 endif
-
-if !empty($VIRTUAL_ENV)
-    let pycode = join(readfile(expand('~/.vim/venv.py')), "\n")
-    execute python_exec . ' ' . pycode
-endif
-
-
-" ------------------- syntastic ----------------------
 
 " show list of errors and warnings on the current file
 nmap <leader>e :Errors<CR>
@@ -285,6 +282,10 @@ let g:jedi#show_call_signatures_delay = 1
 let g:jedi#use_tabs_not_buffers = 1
 " no auto docstring preview window
 autocmd FileType python setlocal completeopt-=preview
+
+
+" -------------- vim-virtualenv --------------
+let g:virtualenv_auto_activate = 1
 
 
 " ---------------- NERDTree ------------------
@@ -359,3 +360,13 @@ highlight DiffChange        cterm=bold ctermbg=none ctermfg=227
 highlight SignifySignAdd    cterm=bold ctermbg=237  ctermfg=119
 highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=167
 highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
+
+
+" ------------------------ clang_complete -------------------------------
+let g:clang_library_path = '/usr/lib/x86_64-linux-gnu/libclang-3.8.so.1'
+let g:clang_user_options = '-std=c++11'
+" let g:clang_close_preview = 1
+let g:clang_auto_select = 1
+" let g:clang_complete_copen = 1
+" let g:syntastic_cpp_compiler = 'clang++'
+let g:syntastic_cpp_compiler_options = '-std=c++11'
