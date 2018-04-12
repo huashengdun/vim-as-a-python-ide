@@ -10,7 +10,7 @@
 ### Dependencies
 ```
 $ sudo apt-get install curl vim exuberant-ctags git
-$ sudo pip3 install pep8 flake8 pyflakes isort
+$ sudo pip install pep8 flake8 pyflakes isort
 ```
 
 ### Installation
