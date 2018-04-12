@@ -1,15 +1,30 @@
 # vim-as-a-python-ide
 
-Vim as a Python IDE
+### Features
+* Python 2 and Python 3 supported, base on your vim compile options.
+* Python syntax checking suppored, use flake8 as a checker.
+* Python auto completion supported, use plugin vim-jedi. 
+* Virtualenv suppored, use plugin vim-virtualenv.
+* JavaScipt syntax checking supported, use jslint as a checker.
 
-1) Support Python 2 and Python 3 base on your vim compile options.
+### Dependencies
+```
+$ sudo apt-get install curl vim exuberant-ctags git
+$ $ sudo pip3 install pep8 flake8 pyflakes isort
+```
 
-2) Support Python syntax check, use flake8 as a checker.
+### Installation
+```
+$ git clone https://github.com/huashengdun/vim-as-a-python-ide.git
+$ cd vim-as-a-python-ide
+$ cp vimrc ~/.vimrc
+$ vim
+```
 
-3) Support Python auto completion, use jedi to take care of it.
-
-4) Support virtualenv, use vim-virtualenv.
-
-5) Support JavaScipt syntax check, use jslint as a checker.
-
-6) And a lot of vim plugins I often use :).
+### Update & Upgrade
+```
+$ vim                    # Commands below are running in vim command mode
+:PlugUpdate <plugin>     # Only update plugin
+:PlugUpdate              # Update all plugins
+:PlugUpgrade             # Upgrade vim-plug itself
+```
