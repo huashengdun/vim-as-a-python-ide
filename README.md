@@ -10,7 +10,7 @@
 ### Dependencies
 ```
 $ sudo apt-get install curl vim exuberant-ctags git
-$ $ sudo pip3 install pep8 flake8 pyflakes isort
+$ sudo pip3 install pep8 flake8 pyflakes isort
 ```
 
 ### Installation
@@ -23,7 +23,7 @@ $ vim
 
 ### Update & Upgrade
 ```
-$ vim                    # Commands below are running in vim command mode
+$ vim                    # Commands below are run in vim command mode
 :PlugUpdate <plugin>     # Only update plugin
 :PlugUpdate              # Update all plugins
 :PlugUpgrade             # Upgrade vim-plug itself
