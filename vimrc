@@ -262,11 +262,11 @@ endif
 
 " show list of errors and warnings on the current file
 nmap <leader>e :Errors<CR>
-" let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_always_populate_loc_list = 1
 " let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_enable_signs = 0
-let g:syntastic_check_on_wq = 0
+let g:syntastic_check_on_wq = 1
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_python_flake8_args = ['-m', 'flake8']
 let g:syntastic_python_flake8_exec = python_path
@@ -363,7 +363,7 @@ highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
 
 
 " ------------------------ clang_complete -------------------------------
-let g:clang_library_path = '/usr/lib/x86_64-linux-gnu/libclang-3.8.so.1'
+let g:clang_library_path = '/usr/lib/x86_64-linux-gnu/libclang-6.0.so.1'
 let g:clang_user_options = '-std=c++11'
 " let g:clang_close_preview = 1
 let g:clang_auto_select = 1
