@@ -28,3 +28,7 @@ $ vim                    # Commands below are run in vim command mode
 :PlugUpdate              # Update all plugins
 :PlugUpgrade             # Upgrade vim-plug itself
 ```
+
+### References
+1. https://github.com/fisadev/fisa-vim-config -- fisa-vim-config
+1. https://github.com/junegunn/vim-plug -- vim-plug 
