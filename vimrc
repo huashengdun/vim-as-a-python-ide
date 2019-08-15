@@ -281,6 +281,8 @@ let g:jedi#show_call_signatures_delay = 1
 " use tabs instead of buffer
 let g:jedi#use_tabs_not_buffers = 1
 " no auto docstring preview window
+let g:jedi#goto_command = "gd"
+let g:jedi#documentation_command = "gk"
 autocmd FileType python setlocal completeopt-=preview
 
 
