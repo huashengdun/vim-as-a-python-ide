@@ -178,7 +178,7 @@ endif
 nmap tn :tabn<CR>
 nmap tp :tabp<CR>
 nmap tm :tabm
-nmap tt :tabnew 
+nmap tt :tabnew<space>
 nmap ts :tab split<CR>
 nmap <Tab> :tabn<CR>
 
