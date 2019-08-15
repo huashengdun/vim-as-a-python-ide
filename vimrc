@@ -129,7 +129,7 @@ let g:html_indent_script1 = "inc"
 let g:html_indent_style1 = "inc"
 
 " strip trailing spaces on save
-autocmd FileType python,javascript autocmd BufWritePre <buffer> %s/\s\+$//e
+autocmd FileType python,javascript autocmd BufWritePre <buffer> :%s/\s\+$//e
 nmap <leader>r :%s/\s\+$//e\|w<CR>
 
 " always show status bar
