@@ -4,7 +4,7 @@
 ```
 $ sudo apt-get install curl vim exuberant-ctags git nodejs
 $ pip3 install pep8 flake8 pyflakes isort
-$ sudo npm install -g jshint
+$ sudo npm install -g jslint
 ```
 
 ### Installation
