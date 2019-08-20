@@ -65,12 +65,6 @@ Plug 'michaeljsmith/vim-indent-object'
 " Indentation based movements
 Plug 'jeetsukumaran/vim-indentwise'
 
-" python auto completion
-Plug 'davidhalter/jedi-vim'
-
-" python virtualenv
-Plug 'jmcantrell/vim-virtualenv'
-
 " Snippets manager (SnipMate), dependencies, and snippets repo
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
@@ -85,6 +79,12 @@ Plug 'mhinz/vim-signify'
 
 " javascript syntax highlighting and improved indentation
 Plug 'pangloss/vim-javascript'
+
+" python auto completion
+Plug 'davidhalter/jedi-vim'
+
+" python virtualenv
+Plug 'jmcantrell/vim-virtualenv'
 
 " clang_complete
 Plug 'Rip-Rip/clang_complete'
@@ -274,22 +274,6 @@ let g:syntastic_javascript_checkers = ['jslint']
 " :SyntasticInfo <language>
 
 
-" ------------------ jedi-vim -----------------------
-
-" almost no delay
-let g:jedi#show_call_signatures_delay = 1
-" use tabs instead of buffer
-let g:jedi#use_tabs_not_buffers = 1
-" no auto docstring preview window
-let g:jedi#goto_command = "gd"
-let g:jedi#documentation_command = "gk"
-autocmd FileType python setlocal completeopt-=preview
-
-
-" -------------- vim-virtualenv --------------
-let g:virtualenv_auto_activate = 1
-
-
 " ---------------- NERDTree ------------------
 
 " toggle nerdtree display
@@ -362,6 +346,23 @@ highlight DiffChange        cterm=bold ctermbg=none ctermfg=227
 highlight SignifySignAdd    cterm=bold ctermbg=237  ctermfg=119
 highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=167
 highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
+
+
+" ------------------ jedi-vim -----------------------
+
+" almost no delay
+let g:jedi#show_call_signatures_delay = 1
+" use tabs instead of buffer
+let g:jedi#use_tabs_not_buffers = 1
+let g:jedi#goto_command = "gd"
+let g:jedi#documentation_command = "gk"
+" no auto docstring preview window
+autocmd FileType python setlocal completeopt-=preview
+
+
+" -------------- vim-virtualenv --------------
+let g:virtualenv_auto_activate = 1
+
 
 
 " ------------------------ clang_complete -------------------------------
