@@ -1,16 +1,10 @@
 # vim-as-a-python-ide
 
-### Features
-* Python 2 and Python 3 supported, base on your vim compile options.
-* Python syntax checking suppored, use flake8 as a checker.
-* Python auto completion supported, use plugin vim-jedi. 
-* Virtualenv suppored, use plugin vim-virtualenv.
-* JavaScipt syntax checking supported, use jslint as a checker.
-
 ### Dependencies
 ```
-$ sudo apt-get install curl vim exuberant-ctags git
-$ sudo pip install pep8 flake8 pyflakes isort
+$ sudo apt-get install curl vim exuberant-ctags git nodejs
+$ pip3 install pep8 flake8 pyflakes isort
+$ sudo npm install -g jshint
 ```
 
 ### Installation
@@ -31,4 +25,4 @@ $ vim                    # Commands below are run in vim command mode
 
 ### References
 1. https://github.com/fisadev/fisa-vim-config -- fisa-vim-config
-1. https://github.com/junegunn/vim-plug -- vim-plug 
+1. https://github.com/junegunn/vim-plug -- vim-plug
