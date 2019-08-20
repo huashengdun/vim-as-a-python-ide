@@ -364,7 +364,6 @@ autocmd FileType python setlocal completeopt-=preview
 let g:virtualenv_auto_activate = 1
 
 
-
 " ------------------------ clang_complete -------------------------------
 let g:clang_library_path = '/usr/lib/x86_64-linux-gnu/libclang-6.0.so.1'
 let g:clang_user_options = '-std=c++11'
