@@ -56,6 +56,12 @@ Plug 'mattn/emmet-vim'
 " Surround
 Plug 'tpope/vim-surround'
 
+" Multiple cursors
+Plug 'mg979/vim-visual-multi'
+
+" Exchange
+Plug 'tommcdo/vim-exchange'
+
 " Autoclose
 Plug 'Townk/vim-autoclose'
 
@@ -77,17 +83,24 @@ Plug 'tpope/vim-fugitive'
 " Git/mercurial/others diff icons on the side of the file lines
 Plug 'mhinz/vim-signify'
 
+" asynchronous autocompletion
+Plug 'Shougo/deoplete.nvim'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
+
 " javascript syntax highlighting and improved indentation
 Plug 'pangloss/vim-javascript'
 
-" python auto completion
+" javascript code completion
+Plug 'carlitux/deoplete-ternjs'
+
+" python code navigation, completion
 Plug 'davidhalter/jedi-vim'
+Plug 'davidhalter/jedi'
+Plug 'deoplete-plugins/deoplete-jedi'
 
 " python virtualenv
-Plug 'jmcantrell/vim-virtualenv'
-
-" clang_complete
-Plug 'Rip-Rip/clang_complete'
+Plug 'huashengdun/vim-virtualenv'
 
 " Tell vim-plug we finished declaring plugins, so it can load them
 call plug#end()
@@ -109,6 +122,10 @@ set nocompatible
 
 " allow plugins by file type (required for plugins!)
 filetype plugin indent on
+
+" no preview and no seclect first(default menu, preview)
+set completeopt-=preview
+set completeopt+=noselect
 
 " tabs and spaces handling
 set expandtab
@@ -177,7 +194,7 @@ endif
 " tab navigation mappings
 nmap tn :tabn<CR>
 nmap tp :tabp<CR>
-nmap tm :tabm
+nmap tm :tabm<space>
 nmap tt :tabnew<space>
 nmap ts :tab split<CR>
 nmap <Tab> :tabn<CR>
@@ -187,6 +204,17 @@ set pastetoggle=<F2>
 
 " save as sudo
 ca w!! w !sudo tee "%"
+
+" clear search highlight
+nnoremap <CR> :noh<CR><CR>
+
+" apply macro on lines visually selected
+function! ExecuteMacroOverVisualRange()
+  echo "@".getcmdline()
+  execute ":'<,'>normal @".nr2char(getchar())
+endfunction
+
+xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
 
 
 " ------------ colorscheme ----------------
@@ -254,10 +282,10 @@ nmap <silent> <C-j> :call Adapt_seoul256_background(-1)<CR>
 
 " ------------------- syntastic ----------------------
 
-if has('python')
-    let python_path = '/usr/bin/python'
-else
+if has('python3')
     let python_path = '/usr/bin/python3'
+else
+    let python_path = '/usr/bin/python2'
 endif
 
 " show list of errors and warnings on the current file
@@ -348,27 +376,32 @@ highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=167
 highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
 
 
+" ---------------------------- deoplete.nvim ------------------------------
+" call deoplete#enable()
+let g:deoplete#enable_at_startup = 1
+
+
 " ------------------ jedi-vim -----------------------
 
 " almost no delay
 let g:jedi#show_call_signatures_delay = 1
 " use tabs instead of buffer
 let g:jedi#use_tabs_not_buffers = 1
+" let g:jedi#popup_select_first = 1
 let g:jedi#goto_command = "gd"
 let g:jedi#documentation_command = "gk"
+" disable jedi-vim completion
+let g:jedi#completions_enabled = 0
+
 " no auto docstring preview window
-autocmd FileType python setlocal completeopt-=preview
+" autocmd FileType python setlocal completeopt-=preview
+
+
+" ---------------------------- deoplete-jedi ------------------------------
+" for virtualenv
+let g:python3_host_prog = '/usr/bin/python3'
+let g:python2_host_prog = '/usr/bin/python2'
 
 
 " -------------- vim-virtualenv --------------
 let g:virtualenv_auto_activate = 1
-
-
-" ------------------------ clang_complete -------------------------------
-let g:clang_library_path = '/usr/lib/x86_64-linux-gnu/libclang-6.0.so.1'
-let g:clang_user_options = '-std=c++11'
-" let g:clang_close_preview = 1
-let g:clang_auto_select = 1
-" let g:clang_complete_copen = 1
-" let g:syntastic_cpp_compiler = 'clang++'
-let g:syntastic_cpp_compiler_options = '-std=c++11'
