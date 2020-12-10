@@ -2,9 +2,13 @@
 
 ### Dependencies
 ```
-$ sudo apt-get install curl vim exuberant-ctags git nodejs
-$ pip3 install pep8 flake8 pyflakes isort
-$ sudo npm install -g jslint
+$ sudo apt install curl vim exuberant-ctags git
+
+$ sudo apt install python3-pip
+$ pip3 install pep8 flake8 pyflakes isort pynvim jedi
+
+$ sudo apt install nodejs npm
+$ sudo npm install -g jslint tern
 ```
 
 ### Installation
@@ -15,12 +19,14 @@ $ cp vimrc ~/.vimrc
 $ vim
 ```
 
-### Update & Upgrade
+### Management
 ```
-$ vim                    # Commands below are run in vim command mode
-:PlugUpdate <plugin>     # Only update plugin
+:PlugUpdate <plugin>     # Only update <plugin>
 :PlugUpdate              # Update all plugins
 :PlugUpgrade             # Upgrade vim-plug itself
+
+:source %                # Reload .vimrc
+:PlugInstall             # Install plugins added
 ```
 
 ### References
